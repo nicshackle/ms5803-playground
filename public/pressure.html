@@ -41,7 +41,7 @@
   let pressures = []
 
   setInterval(() => {
-    fetch('/temp')
+    fetch('/pt')
       .then(response => {
         if(!response.ok) {throw response.status}
         else {return response.json()}
