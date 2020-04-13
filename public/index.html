@@ -31,13 +31,16 @@
 <body>
 <div class="container">
     <div class="temp" id="temp"></div>
-    <div id="plot" style="width:800px;height:400px;"></div>
+    <div id="tempPlot" style="width:80%;height:400px;"></div>
+    <div class="temp" id="pressure"></div>
+    <div id="presPlot" style="width:80%;height:400px;"></div>
 </div>
 </body>
 
 <script>
   let timestamps = []
   let temps = []
+  let pressures = []
 
   setInterval(() => {
     fetch('/pt')
@@ -46,8 +49,10 @@
       })
       .then(data => {
         document.getElementById('temp').innerText = data.temperature + 'C'
+        document.getElementById('pressure').innerText = data.pressure + 'hPa'
         timestamps.push(new Date())
         temps.push(data.temperature)
+        pressures.push(data.pressure)
 
         if(temps.length > 500){
           temps.shift()
@@ -64,7 +69,7 @@
         const plot = document.getElementById('plot')
         Plotly.newPlot('plot', [trace])
       })
-  }, 10*1000)
+  }, 5*1000)
 </script>
 
 </html>
