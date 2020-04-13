@@ -31,8 +31,9 @@
 <body>
 <div class="container">
     <div class="temp" id="temp"></div>
+    <div id="tempPlot" style="width:80%;height:400px;"></div>
     <div class="temp" id="pressure"></div>
-    <div id="plot" style="width:80%;height:400px;"></div>
+    <div id="presPlot" style="width:80%;height:400px;"></div>
 </div>
 </body>
 
@@ -63,7 +64,7 @@
           x: timestamps,
           y: pressures,
           mode: 'lines',
-          name: 'press',
+          name: 'Pressure',
           type: 'scatter'
         }
 
@@ -71,24 +72,13 @@
           x: timestamps,
           y: temps,
           mode: 'lines',
-          name: 'temp',
+          name: 'Temperature',
           type: 'scatter',
-          yaxis: 'y2'
         }
 
-        const layout = {
-          title: 'Pressure & Temperature',
-          yaxis: {title: 'hPa'},
-          yaxis2: {
-            title: 'C',
-            titlefont: {color: 'rgb(148, 103, 189)'},
-            tickfont: {color: 'rgb(148, 103, 189)'},
-            overlaying: 'y',
-            side: 'right'
-          }
-        };
 
-        Plotly.newPlot('plot', [Ptrace, Ttrace], layout)
+        Plotly.newPlot('presPlot', [Ptrace])
+        Plotly.newPlot('tempPlot', [Ttrace])
       })
   }, 500)
 </script>
