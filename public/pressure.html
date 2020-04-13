@@ -1,11 +1,13 @@
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <title>Pressure</title>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
 
 <style>
-    .temp {
+    .pressure {
         font-weight: bold;
         font-size: 72px;
         font-family: 'arial';
@@ -27,17 +29,16 @@
         padding: 0;
     }
 </style>
-
 <body>
 <div class="container">
-    <div class="temp" id="temp"></div>
+    <div class="pressure" id="pressure"></div>
     <div id="plot" style="width:800px;height:400px;"></div>
 </div>
 </body>
 
 <script>
   let timestamps = []
-  let temps = []
+  let pressures = []
 
   setInterval(() => {
     fetch('/temp')
@@ -45,13 +46,13 @@
         return response.json()
       })
       .then(data => {
-        document.getElementById('temp').innerText = data.temperature + 'C'
+        document.getElementById('pressure').innerText = data.pressure + 'C'
         timestamps.push(new Date())
-        temps.push(data.temperature)
+        pressures.push(data.pressure)
 
         const trace = {
           x: timestamps,
-          y: temps,
+          y: pressures,
           mode: 'lines',
           type: 'scatter'
         }
@@ -61,5 +62,4 @@
       })
   }, 1000)
 </script>
-
 </html>
