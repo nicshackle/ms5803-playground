@@ -31,9 +31,8 @@
 <body>
 <div class="container">
     <div class="temp" id="temp"></div>
-    <div id="tempPlot" style="width:80%;height:400px;"></div>
     <div class="temp" id="pressure"></div>
-    <div id="presPlot" style="width:80%;height:400px;"></div>
+    <div id="plot" style="width:80%;height:400px;"></div>
 </div>
 </body>
 
@@ -56,20 +55,25 @@
 
         if(temps.length > 500){
           temps.shift()
+          pressures.shift()
           timestamps.shift()
         }
 
-        const trace = {
+        const Ptrace = {
+          x: timestamps,
+          y: pressures,
+          mode: 'lines',
+          type: 'scatter'
+        }
+
+        const Ttrace = {
           x: timestamps,
           y: temps,
           mode: 'lines',
           type: 'scatter'
         }
 
-        const Tplot = document.getElementById('tempPlot')
-        Plotly.newPlot('Tplot', [trace])
-        const Pplot = document.getElementById('presPlot')
-        Plotly.newPlot('Pplot', [trace])
+        Plotly.newPlot('plot', [Ptrace, Ttrace])
       })
   }, 5*1000)
 </script>
