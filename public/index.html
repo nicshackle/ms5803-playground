@@ -86,7 +86,10 @@
     })
 
   update()
-  setInterval(function () {update()}, 1000)
+  setInterval(() => {
+    console.log('tick')
+    update()
+  }, 1000)
 </script>
 
 </html>
