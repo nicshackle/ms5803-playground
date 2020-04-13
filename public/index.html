@@ -9,7 +9,7 @@
         font-weight: bold;
         font-size: 72px;
         font-family: 'arial';
-        color: #082029;
+        color: #1b7d9a;
     }
 
     .container {
@@ -42,50 +42,51 @@
   let temps = []
   let pressures = []
 
-  setInterval(() => {
-    fetch('/pt')
-      .then(response => {
-        return response.json()
-      })
-      .then(data => {
-        document.getElementById('temp').innerText = data.temperature + 'C'
-        document.getElementById('pressure').innerText = data.pressure + 'hPa'
-        timestamps.push(new Date())
-        temps.push(data.temperature)
-        pressures.push(data.pressure)
+  const update = fetch('/pt')
+    .then(response => {
+      return response.json()
+    })
+    .then(data => {
+      document.getElementById('temp').innerText = data.temperature + 'C'
+      document.getElementById('pressure').innerText = data.pressure + 'hPa'
+      timestamps.push(new Date())
+      temps.push(data.temperature)
+      pressures.push(data.pressure)
 
-        if(temps.length > 500){
-          temps.shift()
-          pressures.shift()
-          timestamps.shift()
-        }
+      if(temps.length > 500){
+        temps.shift()
+        pressures.shift()
+        timestamps.shift()
+      }
 
-        const Ptrace = {
-          x: timestamps,
-          y: pressures,
-          mode: 'lines',
-          name: 'Pressure',
-          type: 'scatter'
-        }
+      const Ptrace = {
+        x: timestamps,
+        y: pressures,
+        mode: 'lines',
+        name: 'Pressure',
+        type: 'scatter'
+      }
 
-        const Ttrace = {
-          x: timestamps,
-          y: temps,
-          mode: 'lines',
-          name: 'Temperature',
-          type: 'scatter',
-        }
+      const Ttrace = {
+        x: timestamps,
+        y: temps,
+        mode: 'lines',
+        name: 'Temperature',
+        type: 'scatter',
+      }
 
 
-        const layout = {
-          plot_bgcolor: 'black',
-          paper_bgcolor: 'black',
-        }
+      const layout = {
+        plot_bgcolor: 'black',
+        paper_bgcolor: 'black',
+      }
 
-        Plotly.newPlot('presPlot', [Ptrace], layout)
-        Plotly.newPlot('tempPlot', [Ttrace], layout)
-      })
-  }, 500)
+      Plotly.newPlot('presPlot', [Ptrace], layout)
+      Plotly.newPlot('tempPlot', [Ttrace], layout)
+    })
+
+  update()
+  setInterval(update, 1000)
 </script>
 
 </html>
