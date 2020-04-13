@@ -1,0 +1,40 @@
+<html>
+	
+	<style>
+	.temp{
+		font-weight: bold;
+		font-size: 72px;
+		font-family: 'arial';
+		color: white;
+	}
+	
+	.container{
+		background-color: black;
+		width: 100%;
+		height: 100vh;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	
+	body{
+		margin: 0;
+		padding: 0;
+	}
+	</style>
+	
+	<body>
+		<div class="container">
+			<div class="temp" id="temp"></div>
+		</div>
+	</body>
+	
+	<script>
+	setInterval(() => {
+		fetch('/temp')
+		.then(response => {return response.json()})
+		.then(data => {document.getElementById('temp').innerText = data.temperature + 'C'})
+		},1000)
+	</script>
+
+</html>
