@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pressure</title>
+</head>
+
+<style>
+    .face {
+        font-size: 72px;
+    }
+
+    .container {
+        background-color: black;
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+    }
+</style>
+<body>
+<div class="container">
+    <div class="face" id="face"></div>
+</div>
+</body>
+
+<script>
+  setInterval(() => {
+    fetch('http://192.168.0.193:3000/pt')
+      .then(response => {
+        if(!response.ok) {throw response.status}
+        else {return response.json()}
+      })
+      .then(data => {
+        const p = data.pressure
+        let face = `🙂`
+        if(p < 1050) face = `🙂`
+        else if(p < 1080) face = `☺️`
+        else if(p < 1090) face = `🥰`
+        document.getElementById('face').innerText = face
+      })
+      .catch(err => console.warn(err))
+  }, 500)
+</script>
+</html>
