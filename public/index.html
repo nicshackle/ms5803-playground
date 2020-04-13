@@ -66,8 +66,10 @@
           type: 'scatter'
         }
 
-        const plot = document.getElementById('plot')
-        Plotly.newPlot('plot', [trace])
+        const Tplot = document.getElementById('tempPlot')
+        Plotly.newPlot('Tplot', [trace])
+        const Pplot = document.getElementById('presPlot')
+        Plotly.newPlot('Pplot', [trace])
       })
   }, 5*1000)
 </script>
