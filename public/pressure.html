@@ -51,7 +51,7 @@
         timestamps.push(new Date())
         pressures.push(data.pressure)
 
-        if(pressures.length > 500){
+        if(pressures.length > 100){
           timestamps.shift()
           pressures.shift()
         }
