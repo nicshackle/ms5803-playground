@@ -42,7 +42,7 @@
   let temps = []
   let pressures = []
 
-  const update = fetch('/pt')
+  const update = () => fetch('/pt')
     .then(response => {
       return response.json()
     })
@@ -86,10 +86,7 @@
     })
 
   update()
-  setInterval(() => {
-    console.log('tick')
-    this.update()
-  }, 1000)
+  setInterval(update, 1000)
 </script>
 
 </html>
