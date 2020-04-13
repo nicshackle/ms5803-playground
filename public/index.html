@@ -77,7 +77,12 @@
         }
 
 
-        Plotly.newPlot('presPlot', [Ptrace])
+        const layout = {
+          plot_bgcolor: 'black',
+          paper_bgcolor: 'black',
+        }
+
+        Plotly.newPlot('presPlot', [Ptrace], layout)
         Plotly.newPlot('tempPlot', [Ttrace])
       })
   }, 500)
