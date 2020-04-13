@@ -20,7 +20,8 @@ app.use(express.static('public'))
 app.get('/temp', (req, res) => {
   sensor.measure()
     .then((r) => {
-      res.send(JSON.stringify(r))
+      if(r.temperature > 100) res.status(500).send("sensor error")
+      else res.send(JSON.stringify(r))
     })
     .catch((error) => {
       console.error(error)
