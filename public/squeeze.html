@@ -33,7 +33,7 @@
 
 <script>
   setInterval(() => {
-    fetch('http://192.168.0.193:3000/pt')
+    fetch('/pt')
       .then(response => {
         if(!response.ok) {throw response.status}
         else {return response.json()}
@@ -41,9 +41,9 @@
       .then(data => {
         const p = data.pressure
         let face = `🙂`
-        if(p < 1050) face = `🙂`
-        else if(p < 1080) face = `☺️`
-        else if(p < 1090) face = `🥰`
+        if(p < 1020) face = `🙂`
+        else if(p < 1030) face = `☺️`
+        else face = `🥰`
         document.getElementById('face').innerText = face
       })
       .catch(err => console.warn(err))
