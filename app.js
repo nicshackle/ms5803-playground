@@ -1,15 +1,16 @@
-var ms5803 = require('ms5803');
-var sensor = new ms5803(addr=0x76);
+var ms5803 = require('ms5803')
+var sensor = new ms5803(addr = 0x76)
 
 sensor.reset()
-	.then(sensor.begin)
-	.then((c)=>{
-		console.log("calibration array: " + c);
-	})
-	.catch((error)=>{
-		console.error(error);
-	});
-	
+  .then(sensor.begin)
+  .then((c) => {
+    console.log("calibration array: " + c)
+    app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`))
+  })
+  .catch((error) => {
+    console.error(error)
+  })
+
 const express = require('express')
 const app = express()
 const port = 3000
@@ -17,10 +18,12 @@ const port = 3000
 app.use(express.static('public'))
 
 app.get('/temp', (req, res) => {
-	sensor.measure()
-			.then((r)=>{
-				res.send(JSON.stringify(r));
-			})
-	})
+  sensor.measure()
+    .then((r) => {
+      res.send(JSON.stringify(r))
+    })
+    .catch((error) => {
+      console.error(error)
+    })
+})
 
-app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`))
