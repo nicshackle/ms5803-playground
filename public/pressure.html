@@ -43,12 +43,18 @@
   setInterval(() => {
     fetch('/temp')
       .then(response => {
-        return response.json()
+        if(!response.ok) {throw response.status}
+        else {return response.json()}
       })
       .then(data => {
-        document.getElementById('pressure').innerText = data.pressure + 'C'
+        document.getElementById('pressure').innerText = data.pressure
         timestamps.push(new Date())
         pressures.push(data.pressure)
+
+        if(pressures.length > 500){
+          timestamps.shift()
+          pressures.shift()
+        }
 
         const trace = {
           x: timestamps,
@@ -60,6 +66,7 @@
         const plot = document.getElementById('plot')
         Plotly.newPlot('plot', [trace])
       })
-  }, 1000)
+      .catch(err => console.warn(err))
+  }, 500)
 </script>
 </html>
