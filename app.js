@@ -11,7 +11,9 @@ sensor.reset()
     setInterval(() => {
       sensor.measure()
         .then((r) => {
-          if(r.temperature > 100 || r.temperature < 100 || r.pressure > 5000 || r.pressure < 0) return null
+          if(r.temperature > 100 || r.temperature < 100 || r.pressure > 5000 || r.pressure < 0){
+            console.log("sensor error")
+          }
           else{
             PT = r
           }
