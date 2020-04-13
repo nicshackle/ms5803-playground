@@ -47,7 +47,7 @@
         else {return response.json()}
       })
       .then(data => {
-        document.getElementById('pressure').innerText = data.pressure
+        document.getElementById('pressure').innerText = data.pressure + "hPa"
         timestamps.push(new Date())
         pressures.push(data.pressure)
 
