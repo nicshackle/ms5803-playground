@@ -74,7 +74,19 @@
           yaxis: 'y2'
         }
 
-        Plotly.newPlot('plot', [Ptrace, Ttrace])
+        const layout = {
+          title: 'Pressure & Temperature',
+          yaxis: {title: 'hPa'},
+          yaxis2: {
+            title: 'C',
+            titlefont: {color: 'rgb(148, 103, 189)'},
+            tickfont: {color: 'rgb(148, 103, 189)'},
+            overlaying: 'y',
+            side: 'right'
+          }
+        };
+
+        Plotly.newPlot('plot', [Ptrace, Ttrace], layout)
       })
   }, 5*1000)
 </script>
