@@ -25,6 +25,7 @@
     body {
         margin: 0;
         padding: 0;
+        color: #082029;
     }
 </style>
 
@@ -83,7 +84,7 @@
         }
 
         Plotly.newPlot('presPlot', [Ptrace], layout)
-        Plotly.newPlot('tempPlot', [Ttrace])
+        Plotly.newPlot('tempPlot', [Ttrace], layout)
       })
   }, 500)
 </script>
