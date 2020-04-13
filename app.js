@@ -31,7 +31,7 @@ app.get('/temp', (req, res) => {
 app.get('/pressure', (req, res) => {
   sensor.measure()
     .then((r) => {
-      if(r.pressure > 5000) res.status(500).send("sensor error")
+      if(r.pressure > 5000 || r.pressure < 0) res.status(500).send("sensor error")
       else res.send(JSON.stringify(r))
     })
     .catch((error) => {
