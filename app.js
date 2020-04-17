@@ -36,7 +36,7 @@ const update = () => {
       }
       else{
         db.run(
-          "INSERT INTO entries (timestamp, temp, pressure) VALUES ?,?,?",
+          "INSERT INTO entries (timestamp, temp, pressure) VALUES (?,?,?)",
           new Date().toISOString(),
           r.temperature,
           r.pressure,
