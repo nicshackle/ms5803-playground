@@ -1,7 +1,7 @@
 var moment = require('moment-timezone');
 console.log(moment().format('h:mm:ss a'))
 console.log(moment().tz('America/Indiana/Indianapolis').format('h:mm:ss a'))
-// entries (timestamp DATETIME, temp NUMBER, pressure, NUMBER);
+// entries (timestamp DATETIME, temp NUMBER, pressure NUMBER);
 var sqlite3 = require('sqlite3').verbose();
 var db = new sqlite3.Database('data.db');
 

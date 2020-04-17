@@ -35,41 +35,38 @@
     <div class="temp" id="pressure"></div>
     <div id="presPlot" style="width:80%;height:400px;"></div>
 </div>
+<div class="temp" id="maxTemp"></div>
+<div class="temp" id="minTemp"></div>
 </body>
 
 <script>
-  let timestamps = []
-  let temps = []
-  let pressures = []
-
   const update = () => fetch('/pt')
     .then(response => {
       return response.json()
     })
     .then(data => {
-      document.getElementById('temp').innerText = data.temperature + 'C'
-      document.getElementById('pressure').innerText = data.pressure + 'hPa'
-      timestamps.push(new Date())
-      temps.push(data.temperature)
-      pressures.push(data.pressure)
+      // [{"timestamp":"2020-04-17T08:33:47.290Z","temp":25.62,"pressure":1014.2}]
 
-      if(temps.length > 500){
-        temps.shift()
-        pressures.shift()
-        timestamps.shift()
-      }
+      const maxTemp = Math.max(data.map(entry => {return entry.temp}))
+      const minTemp = Math.min(data.map(entry => {return entry.temp}))
+      const currentTemp = data[0] && data[0].temp
+
+      document.getElementById('temp').innerText = currentTemp + 'C'
+      document.getElementById('maxTemp').innerText = 'max: ' + maxTemp + 'C'
+      document.getElementById('minTemp').innerText = 'min: ' + minTemp + 'C'
+      document.getElementById('pressure').innerText = data.pressure + 'hPa'
 
       const Ptrace = {
-        x: timestamps,
-        y: pressures,
+        x: data.map(entry => {return entry.timestamp}),
+        y: data.map(entry => {return entry.pressure}),
         mode: 'lines',
         name: 'Pressure',
         type: 'scatter'
       }
 
       const Ttrace = {
-        x: timestamps,
-        y: temps,
+        x: data.map(entry => {return entry.timestamp}),
+        y: data.map(entry => {return entry.temp}),
         mode: 'lines',
         name: 'Temperature',
         type: 'scatter',
