@@ -50,23 +50,10 @@
 </body>
 
 <script>
-
-    const getData = new Promise(function(resolve, reject) {
-      let xhr = new XMLHttpRequest();
-      xhr.onload = function() {
-        if (this.status === 200) {
-          const data = JSON.parse(this.responseText);
-          return resolve(data);
-        } else{
-          return reject(new Error("couldn't make request"))
-        }
-      };
-      xhr.open("GET", '/pt', true);
-      xhr.send();
-    });
-
-
-  const update = () => getData
+  const update = () => fetch('/pt')
+    .then(response => {
+      return response.json()
+    })
     .then(data => {
       // [{"timestamp":"2020-04-17T08:33:47.290Z","temp":25.62,"pressure":1014.2}]
 
