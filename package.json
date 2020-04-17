@@ -10,6 +10,9 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
-    "ms5803": "^1.0.1"
+    "moment-timezone": "^0.5.28",
+    "ms5803": "^1.0.1",
+    "oled-font-5x7": "^1.0.3",
+    "rpi-oled": "^0.9.1"
   }
 }
