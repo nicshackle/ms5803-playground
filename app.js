@@ -35,7 +35,13 @@ const update = () => {
         console.log("sensor error")
       }
       else{
-        db.run("INSERT INTO entries (timestamp, temp, pressure)", new Date().toISOString(), r.temperature, r.pressure);
+        db.run(
+          "INSERT INTO entries (timestamp, temp, pressure)",
+          new Date().toISOString(),
+          r.temperature,
+          r.pressure,
+          err => {if(err) console.warn(err)}
+        );
         PT = r
         oled.fillRect(1, 1, 128, 64, 0);
         oled.setCursor(1, 1);
