@@ -13,7 +13,7 @@
         font-size: 40px;
     }
 
-    .tempsContainer{
+    .tempsContainer {
         display: flex;
         flex-direction: row;
         width: 80%;
@@ -54,7 +54,9 @@
 </body>
 
 <script>
-  document.getElementById('times').innerText = `SA: ${moment().format('h:mma')} IND: ${moment().tz('America/Indiana/Indianapolis').format('h:mma')}`
+  setInterval(() => {
+    document.getElementById('times').innerText = `SA: ${moment().format('h:mma')} IND: ${moment().tz('America/Indiana/Indianapolis').format('h:mma')}`
+  }, 60 * 1000)
 
   const update = () => fetch('/pt')
     .then(response => {
@@ -63,10 +65,14 @@
     .then(data => {
       // [{"timestamp":"2020-04-17T08:33:47.290Z","temp":25.62,"pressure":1014.2}]
 
-      if(data.length < 1) throw 'No data'
+      if (data.length < 1) throw 'No data'
 
-      const maxTemp = Math.max(...data.map(entry => {return entry.temp}))
-      const minTemp = Math.min(...data.map(entry => {return entry.temp}))
+      const maxTemp = Math.max(...data.map(entry => {
+        return entry.temp
+      }))
+      const minTemp = Math.min(...data.map(entry => {
+        return entry.temp
+      }))
       const currentTemp = data[0].temp
       const currentPressure = data[0].pressure
 
@@ -76,16 +82,24 @@
       document.getElementById('pressure').innerText = currentPressure + 'hPa'
 
       const Ptrace = {
-        x: data.map(entry => {return entry.timestamp}),
-        y: data.map(entry => {return entry.pressure}),
+        x: data.map(entry => {
+          return entry.timestamp
+        }),
+        y: data.map(entry => {
+          return entry.pressure
+        }),
         mode: 'lines+markers',
         name: 'Pressure',
         type: 'scatter'
       }
 
       const Ttrace = {
-        x: data.map(entry => {return entry.timestamp}),
-        y: data.map(entry => {return entry.temp}),
+        x: data.map(entry => {
+          return entry.timestamp
+        }),
+        y: data.map(entry => {
+          return entry.temp
+        }),
         mode: 'lines+markers',
         name: 'Temperature',
         type: 'scatter',
@@ -102,7 +116,7 @@
     })
 
   update()
-  setInterval(update, 1000*60)
+  setInterval(update, 1000 * 60)
 </script>
 
 </html>
