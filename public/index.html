@@ -11,7 +11,7 @@
     .temp {
         font-weight: lighter;
         font-size: 72px;
-        color: #d6b7cc;
+        color: #f6a3a1;
     }
 
     .tempsContainer{
@@ -22,7 +22,7 @@
     }
 
     .container {
-        background-color: black;
+        background-color: #3b3b3b;
         width: 100%;
         height: 100vh;
         display: flex;
@@ -76,7 +76,7 @@
       const Ptrace = {
         x: data.map(entry => {return entry.timestamp}),
         y: data.map(entry => {return entry.pressure}),
-        mode: 'lines',
+        mode: 'lines+markers',
         name: 'Pressure',
         type: 'scatter'
       }
