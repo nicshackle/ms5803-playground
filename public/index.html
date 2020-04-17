@@ -11,7 +11,7 @@
         font-weight: bold;
         font-size: 72px;
         font-family: 'arial';
-        color: #1b7d9a;
+        color: #d6b7cc;
     }
 
     .tempsContainer{
@@ -83,7 +83,7 @@
       const Ttrace = {
         x: data.map(entry => {return entry.timestamp}),
         y: data.map(entry => {return entry.temp}),
-        mode: 'lines',
+        mode: 'lines+markers',
         name: 'Temperature',
         type: 'scatter',
       }
