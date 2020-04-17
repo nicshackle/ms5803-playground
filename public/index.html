@@ -50,10 +50,22 @@
 </body>
 
 <script>
-  const update = () => fetch('/pt')
-    .then(response => {
-      return response.json()
-    })
+
+    const getData = new Promise(function(resolve, reject) {
+      xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          var data = JSON.parse(this.responseText);
+          return resolve(data);
+        } else{
+          return reject(new Error("couldn't make request"))
+        }
+      };
+      xmlhttp.open("GET", '/pt', true);
+      xmlhttp.send();
+    });
+
+
+  const update = () => getData()
     .then(data => {
       // [{"timestamp":"2020-04-17T08:33:47.290Z","temp":25.62,"pressure":1014.2}]
 
