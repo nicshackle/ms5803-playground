@@ -55,7 +55,6 @@
       let xhr = new XMLHttpRequest();
       xhr.onload = function() {
         if (this.status === 200) {
-          console.log(this.responseText)
           const data = JSON.parse(this.responseText);
           return resolve(data);
         } else{
