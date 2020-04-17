@@ -55,7 +55,7 @@
 
 <script>
   setInterval(() => {
-    document.getElementById('times').innerText = `SA: ${moment().format('h:mma')} IND: ${moment().tz('America/Indiana/Indianapolis').format('h:mma')}`
+    document.getElementById('times').innerText = `SA: ${moment().format('h:mma')}          IND: ${moment().tz('America/Indiana/Indianapolis').format('h:mma')}`
   }, 60 * 1000)
 
   const update = () => fetch('/pt')
