@@ -12,6 +12,11 @@
         color: #1b7d9a;
     }
 
+    .tempsContainer{
+        display: flex;
+        flex-direction: row;
+    }
+
     .container {
         background-color: black;
         width: 100%;
@@ -30,13 +35,16 @@
 
 <body>
 <div class="container">
-    <div class="temp" id="temp"></div>
+    <div class="tempsContainer">
+        <div class="temp" id="temp"></div>
+        <div class="temp" id="maxTemp"></div>
+        <div class="temp" id="minTemp"></div>
+    </div>
     <div id="tempPlot" style="width:80%;height:400px;"></div>
     <div class="temp" id="pressure"></div>
     <div id="presPlot" style="width:80%;height:400px;"></div>
 </div>
-<div class="temp" id="maxTemp"></div>
-<div class="temp" id="minTemp"></div>
+
 </body>
 
 <script>
@@ -50,11 +58,12 @@
       const maxTemp = Math.max(data.map(entry => {return entry.temp}))
       const minTemp = Math.min(data.map(entry => {return entry.temp}))
       const currentTemp = data[0] && data[0].temp
+      const currentPressure = data[0] && data[0].pressure
 
       document.getElementById('temp').innerText = currentTemp + 'C'
       document.getElementById('maxTemp').innerText = 'max: ' + maxTemp + 'C'
       document.getElementById('minTemp').innerText = 'min: ' + minTemp + 'C'
-      document.getElementById('pressure').innerText = data.pressure + 'hPa'
+      document.getElementById('pressure').innerText = currentPressure + 'hPa'
 
       const Ptrace = {
         x: data.map(entry => {return entry.timestamp}),
