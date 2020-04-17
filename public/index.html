@@ -55,10 +55,8 @@
     .then(data => {
       // [{"timestamp":"2020-04-17T08:33:47.290Z","temp":25.62,"pressure":1014.2}]
 
-      console.log(data.map(entry => {return entry.temp}))
-
-      const maxTemp = Math.max(data.map(entry => {return entry.temp}))
-      const minTemp = Math.min(data.map(entry => {return entry.temp}))
+      const maxTemp = Math.max(...data.map(entry => {return entry.temp}))
+      const minTemp = Math.min(...data.map(entry => {return entry.temp}))
       const currentTemp = data[0].temp
       const currentPressure = data[0].pressure
 
