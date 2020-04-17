@@ -35,7 +35,7 @@ const updateOled = () => {
 }
 
 updateOled()
-schedule.scheduleJob('*/1 * * * *', updateOled()); // every min
+schedule.scheduleJob('*/1 * * * *', updateOled); // every min
 
 var ms5803 = require('ms5803')
 var sensor = new ms5803(addr = 0x76)
