@@ -1,7 +1,9 @@
 <html>
 
 <head>
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="plotly-latest.min.js"></script>
+    <script src="moment.js"></script>
+    <script src="moment-timezone.js" type="application/javascript"></script>
 </head>
 
 <style>
@@ -50,6 +52,7 @@
 </body>
 
 <script>
+  console.log(moment().format('h:mma'))
   const update = () => fetch('/pt')
     .then(response => {
       return response.json()
