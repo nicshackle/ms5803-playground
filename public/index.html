@@ -53,9 +53,10 @@
 
     const getData = new Promise(function(resolve, reject) {
       let xhr = new XMLHttpRequest();
-      xhr.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-          var data = JSON.parse(this.responseText);
+      xhr.onload = function() {
+        if (this.status === 200) {
+          console.log(this.responseText)
+          const data = JSON.parse(this.responseText);
           return resolve(data);
         } else{
           return reject(new Error("couldn't make request"))
