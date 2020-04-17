@@ -11,7 +11,7 @@
     .temp {
         font-weight: lighter;
         font-size: 72px;
-        color: #f6a3a1;
+        color: white;
     }
 
     .tempsContainer{
@@ -40,6 +40,7 @@
 
 <body>
 <div class="container">
+    <div id="times"></div>
     <div class="tempsContainer">
         <div class="temp" id="temp"></div>
         <div class="temp" id="maxTemp"></div>
@@ -53,7 +54,8 @@
 </body>
 
 <script>
-  console.log(moment().format('h:mma'))
+  document.getElementById('times').innerText = `SA: ${moment().format('h:mma')} IND: ${moment().tz('America/Indiana/Indianapolis').format('h:mma')}`
+
   const update = () => fetch('/pt')
     .then(response => {
       return response.json()
