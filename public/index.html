@@ -59,8 +59,8 @@
 
       const maxTemp = Math.max(...data.map(entry => {return entry.temp}))
       const minTemp = Math.min(...data.map(entry => {return entry.temp}))
-      const currentTemp = data[0].temp
-      const currentPressure = data[0].pressure
+      const currentTemp = data.map(entry => {return entry.temp}).pop()
+      const currentPressure = data.map(entry => {return entry.pressure}).pop()
 
       document.getElementById('temp').innerText = currentTemp + 'C'
       document.getElementById('maxTemp').innerText = 'max: ' + maxTemp + 'C'

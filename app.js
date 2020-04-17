@@ -24,9 +24,9 @@ const updateOled = () => {
       oled.fillRect(1, 1, 128, 64, 0);
       oled.setCursor(1, 1);
       oled.writeString(font, 1, `${data.temp}C ${data.pressure}hPa`, 1, true);
-      oled.setCursor(1, 20);
+      oled.setCursor(1, 16);
       oled.writeString(font, 1, 'IND: ' + moment().tz('America/Indiana/Indianapolis').format('h:mma'), 1, true);
-      oled.setCursor(1, 40);
+      oled.setCursor(1, 32);
       oled.writeString(font, 1, 'SA: ' + moment().format('h:mma'), 1, true);
     } else {
       console.warn(err)
@@ -79,7 +79,7 @@ const port = 3000
 app.use(express.static('public'))
 
 app.get('/pt', (req, res) => {
-  db.all(`SELECT * FROM entries LIMIT 500`, (err, rows) => {
+  db.all(`SELECT * FROM entries ORDER BY timestamp DESC LIMIT 500`, (err, rows) => {
     if(!err) res.send(JSON.stringify(rows))
     else res.status(500).send(err)
   })
