@@ -18,21 +18,33 @@ var opts = {
 
 var oled = new oled(opts);
 
-oled.clearDisplay(false);
-oled.fillRect(1, 1, 128, 64, 0);
-oled.setCursor(1, 1);
-oled.writeString(font, 1, 'Cats and dogs are really cool animals, you know.', 1, true);
+const updateOled = () => {
+  db.get(`SELECT * FROM entries ORDER BY timestamp DESC LIMIT 1`, (err, data) => {
+    if(!err){
+      oled.fillRect(1, 1, 128, 64, 0);
+      oled.setCursor(1, 1);
+      oled.writeString(font, 1, `${data.temp}C ${data.pressure}hPa`, 1, true);
+      oled.setCursor(1, 20);
+      oled.writeString(font, 1, 'IND: ' + moment().tz('America/Indiana/Indianapolis').format('h:mma'), 1, true);
+      oled.setCursor(1, 40);
+      oled.writeString(font, 1, 'SA: ' + moment().format('h:mma'), 1, true);
+    } else {
+      console.warn(err)
+    }
+  })
+}
+
+updateOled()
+schedule.scheduleJob('*/1 * * * *', updateOled()); // every min
 
 var ms5803 = require('ms5803')
 var sensor = new ms5803(addr = 0x76)
-
-let PT = {}
 
 const update = () => {
   sensor.measure()
     .then((r) => {
       if(r.temperature > 100 || r.temperature < 0 || r.pressure > 5000 || r.pressure < 0){
-        console.log("sensor error")
+        console.warn("sensor error")
       }
       else{
         db.run(
@@ -42,13 +54,6 @@ const update = () => {
           r.pressure,
           err => {if(err) console.warn(err)}
         );
-        PT = r
-        oled.fillRect(1, 1, 128, 64, 0);
-        oled.setCursor(1, 1);
-        oled.writeString(font, 1, `${PT.temperature}C ${PT.pressure}hPa`, 1, true);
-        oled.setCursor(1, 20);
-        oled.writeString(font, 1, moment().tz('America/Indiana/Indianapolis').format('h:mma'), 1, true);
-        oled.writeString(font, 1, moment().format('h:mma'), 1, true);
       }
     })
     .catch((error) => {
