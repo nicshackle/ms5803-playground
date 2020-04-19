@@ -79,7 +79,7 @@ const port = 3000
 app.use(express.static('public'))
 
 app.get('/pt', (req, res) => {
-  db.all(`SELECT * FROM entries WHERE pressure > 950 ORDER BY timestamp DESC LIMIT 200`, (err, rows) => {
+  db.all(`SELECT * FROM entries WHERE pressure > 950 ORDER BY timestamp DESC LIMIT 300`, (err, rows) => {
     if(!err) res.send(JSON.stringify(rows))
     else res.status(500).send(err)
   })
