@@ -56,16 +56,19 @@
 
 <div class="container">
     <img src="https://sawx.co.za/satellite/africa-weather-satellite-photos_RGBNatColour_SouthernAfrica.jpg"
-         width="500px">
-    <div id="times" style="font-size: 50px; padding-bottom: 20px;">Times</div>
+         width="90%">
+    <div id="SATime" style="font-size: 50px; padding: 20px;"></div>
+    <div id="INDTime" style="font-size: 50px; padding: 20px;"></div>
 </div>
 
 </body>
 
 <script>
-  document.getElementById('times').innerText = `South Africa ${moment().format('h:mma')} & Indianapolis ${moment().tz('America/Indiana/Indianapolis').format('h:mma')}`
+  document.getElementById('SATime').innerText = `South Africa ${moment().format('h:mma')}`
+  document.getElementById('INDTime').innerText = `Indianapolis ${moment().tz('America/Indiana/Indianapolis').format('h:mma')}`
   setInterval(() => {
-    document.getElementById('times').innerText = `South Africa ${moment().format('h:mma')} & Indianapolis ${moment().tz('America/Indiana/Indianapolis').format('h:mma')}`
+    document.getElementById('SATime').innerText = `South Africa ${moment().format('h:mma')}`
+    document.getElementById('INDTime').innerText = `Indianapolis ${moment().tz('America/Indiana/Indianapolis').format('h:mma')}`
   }, 60 * 1000)
 
   const update = () => fetch('/pt')
