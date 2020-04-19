@@ -76,7 +76,7 @@
 
   //update sat image every hour
   const updateImage = () => {
-    document.getElementById("satImage").src = "https://sawx.co.za/satellite/africa-weather-satellite-photos_RGBNatColour_SouthernAfrica.jpg"
+    document.getElementById("satImage").src = "https://sawx.co.za/satellite/africa-weather-satellite-photos_RGBNatColour_SouthernAfrica.jpg?" + new Date().getTime();
     setTimeout(updateImage, 60 * 1000 * 60 * 60)
   }
   updateImage()
