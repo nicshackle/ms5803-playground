@@ -67,18 +67,19 @@
 <script>
 
   //update time every minute
-  document.getElementById('SATime').innerText = moment().format('h:mma')
-  document.getElementById('INDTime').innerText = moment().tz('America/Indiana/Indianapolis').format('h:mma')
-  setInterval(() => {
+  const updateTime = () => {
     document.getElementById('SATime').innerText = moment().format('h:mma')
     document.getElementById('INDTime').innerText = moment().tz('America/Indiana/Indianapolis').format('h:mma')
-  }, 60 * 1000)
+    setTimeout(updateTime, 60 * 1000)
+  }
+  updateTime()
 
   //update sat image every hour
-  document.getElementById("satImage").src = "https://sawx.co.za/satellite/africa-weather-satellite-photos_RGBNatColour_SouthernAfrica.jpg"
-  setInterval(() => {
+  const updateImage = () => {
     document.getElementById("satImage").src = "https://sawx.co.za/satellite/africa-weather-satellite-photos_RGBNatColour_SouthernAfrica.jpg"
-  }, 60 * 1000 * 60 * 60)
+    setTimeout(updateImage, 60 * 1000 * 60 * 60)
+  }
+  updateImage()
 
   const update = () => fetch('/pt')
     .then(response => {
