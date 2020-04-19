@@ -56,7 +56,9 @@
 
 <div class="container">
     <img id="satImage" width="90%">
+    <p>South Africa</p>
     <div id="SATime" style="font-size: 50px; padding: 20px;"></div>
+    <p>Indianapolis</p>
     <div id="INDTime" style="font-size: 50px; padding: 20px;"></div>
 </div>
 
@@ -65,11 +67,11 @@
 <script>
 
   //update time every minute
-  document.getElementById('SATime').innerText = `South Africa ${moment().format('h:mma')}`
-  document.getElementById('INDTime').innerText = `Indianapolis ${moment().tz('America/Indiana/Indianapolis').format('h:mma')}`
+  document.getElementById('SATime').innerText = moment().format('h:mma')
+  document.getElementById('INDTime').innerText = moment().tz('America/Indiana/Indianapolis').format('h:mma')
   setInterval(() => {
-    document.getElementById('SATime').innerText = `South Africa ${moment().format('h:mma')}`
-    document.getElementById('INDTime').innerText = `Indianapolis ${moment().tz('America/Indiana/Indianapolis').format('h:mma')}`
+    document.getElementById('SATime').innerText = moment().format('h:mma')
+    document.getElementById('INDTime').innerText = moment().tz('America/Indiana/Indianapolis').format('h:mma')
   }, 60 * 1000)
 
   //update sat image every hour
