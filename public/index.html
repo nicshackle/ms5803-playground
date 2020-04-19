@@ -22,7 +22,7 @@
 
     .container {
         background-color: #000000;
-        width: 100%;
+        width: 50%;
         height: 100vh;
         display: flex;
         justify-content: center;
@@ -35,21 +35,29 @@
         padding: 0;
         font-family: 'Pangolin', cursive;
         color: wheat;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
     }
 </style>
 
 <body>
 <div class="container">
-    <div id="times" style="font-size: 50px; padding-bottom: 20px;">Times</div>
     <div class="tempsContainer">
         <div class="temp" id="temp"></div>
         <div class="temp" id="maxTemp"></div>
         <div class="temp" id="minTemp"></div>
     </div>
-    <div id="tempPlot" style="width:90%;height:400px;"></div>
+    <div id="tempPlot" style="width:100%;height:400px;"></div>
     <div class="temp" id="pressure"></div>
-    <div id="presPlot" style="width:90%;height:400px;"></div>
-    <img src="https://sawx.co.za/satellite/africa-weather-satellite-photos_RGBNatColour_SouthernAfrica.jpg" width="200px">
+    <div id="presPlot" style="width:100%;height:400px;"></div>
+</div>
+
+<div class="container">
+    <img src="https://sawx.co.za/satellite/africa-weather-satellite-photos_RGBNatColour_SouthernAfrica.jpg"
+         width="500px">
+    <div id="times" style="font-size: 50px; padding-bottom: 20px;">Times</div>
 </div>
 
 </body>
