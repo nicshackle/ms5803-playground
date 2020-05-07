@@ -55,16 +55,26 @@
 </div>
 
 <div class="container">
-    <img id="satImage" width="90%">
+    <img id="satImage" width="80%">
     <p>South Africa</p>
     <div id="SATime" style="font-size: 50px; padding-bottom: 20px;"></div>
     <p>Indianapolis</p>
     <div id="INDTime" style="font-size: 50px; padding-bottom: 20px;"></div>
+    <button onclick="turnLightOn()">Lights On</button>
+    <button onclick="turnLightOff()">Lights Off</button>
 </div>
 
 </body>
 
 <script>
+
+   const turnLightOn = () => {
+     fetch('http://192.168.0.122/on', {method: 'POST'})
+   }
+
+   const turnLightOff = () => {
+     fetch('http://192.168.0.122/off', {method: 'POST'})
+   }
 
   //update time every minute
   const updateTime = () => {
